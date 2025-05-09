@@ -8,6 +8,8 @@ namespace iTasks
 {
     internal class Programador
     {
+        private int nivelExperiencia { get; set; }
 
+        private int idGestor { get; set; }  
     }
 }
