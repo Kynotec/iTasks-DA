@@ -98,6 +98,7 @@
     <Compile Include="Views\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Gestor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Models\Programador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
