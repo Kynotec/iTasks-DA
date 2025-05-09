@@ -8,7 +8,6 @@ namespace iTasks.Models
 {
     internal class Tarefa
     {
-        //ola
         private int id { get; set; }
         private int idGestor { get; set; }
 

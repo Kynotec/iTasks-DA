@@ -13,7 +13,7 @@ namespace iTasks.Models
         private string nome { get; set; }   
 
         private string username { get; set; }
-
+        //ya
         private string password { get; set; }   
     }
 }
