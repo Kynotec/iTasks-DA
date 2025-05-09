@@ -8,6 +8,9 @@ namespace iTasks.Models
 {
     internal class Gestor
     {
+        string Departamento { get; set; }
+        bool GereUtilizadores { get; set; }
         
     }
+
 }
