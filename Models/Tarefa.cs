@@ -8,28 +8,28 @@ namespace iTasks.Models
 {
     internal class Tarefa
     {
-        private int Id { get; set; }
-        private int IdGestor { get; set; }
+        private int id { get; set; }
+        private int idGestor { get; set; }
 
-        private int IdProgramador { get; set; }
+        private int idProgramador { get; set; }
 
-        private int OrdemExecucao { get; set; }
+        private int ordemExecucao { get; set; }
 
-        private string Descricao { get; set; }
+        private string descricao { get; set; }
 
-        private DateTime DataPrevistaInicio { get; set; }
+        private DateTime dataPrevistaInicio { get; set; }
 
-        private DateTime DataPrevistaFim { get; set; }
+        private DateTime dataPrevistaFim { get; set; }
 
-        private int IdTipoTarefa { get; set; }
+        private int idTipoTarefa { get; set; }
 
-        private int StoryPoints { get; set; }
+        private int storyPoints { get; set; }
 
-        private DateTime DataRealInicio { get; set; }
-        private DateTime DataRealFim { get; set;}
+        private DateTime dataRealInicio { get; set; }
+        private DateTime dataRealFim { get; set;}
 
-        private DateTime DataCriacao { get; set;}
+        private DateTime dataCriacao { get; set;}
 
-        private string EstadoAtual { get; set; }
+        private string estadoAtual { get; set; }
     }
 }
