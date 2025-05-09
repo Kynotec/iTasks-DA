@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iTasks
+namespace iTasks.Models
 {
-    internal class Programador
+    internal class Programador:Utilizador
     {
         private int nivelExperiencia { get; set; }
 
