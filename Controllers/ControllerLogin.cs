@@ -1,0 +1,52 @@
+﻿using iTasks.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Windows.Forms;
+using System.Data.Entity;
+
+
+namespace iTasks.Controllers
+{
+    public class ControllerLogin: Controller
+    {
+
+        public ControllerLogin()
+        {
+            
+        }
+
+        public bool  Login(string username, string password)
+        {     
+            try
+            {
+                //Criação de uma nova instancia da base de dados
+                using (TarefaContext _dbContext = new TarefaContext()) 
+                {
+                    var user = _dbContext.Utilizadores.FirstOrDefault(u =>
+                    u.username == username && u.password == password);
+
+                    //Se o username e a password forem diferentes de null dá retuqrn true
+                    if( user != null)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro de acesso à BD: {ex.Message}");
+                return false;
+            }
+           
+        }
+    }
+}

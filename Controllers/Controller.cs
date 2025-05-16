@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iTasks.Models
+namespace iTasks.Controllers
 {
-    public class TipoTarefa
+    public class Controller
     {
-        public int id { get; set; }
-
-        public string nome { get; set; }
 
     }
 }

@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 
 namespace iTasks.Models
 {
-    internal class Tarefa
+    public class Tarefa
     {
 
-        private int id { get; set; }
-        private int idGestor { get; set; }
+        public int id { get; set; }
+        public int idGestor { get; set; }
 
-        private int idProgramador { get; set; }
+        public int idProgramador { get; set; }
 
-        private int ordemExecucao { get; set; }
+        public int ordemExecucao { get; set; }
 
-        private string descricao { get; set; }
+        public string descricao { get; set; }
 
-        private DateTime dataPrevistaInicio { get; set; }
+        public DateTime dataPrevistaInicio { get; set; }
 
-        private DateTime dataPrevistaFim { get; set; }
+        public DateTime dataPrevistaFim { get; set; }
 
-        private int idTipoTarefa { get; set; }
+        public int idTipoTarefa { get; set; }
 
-        private int storyPoints { get; set; }
+        public int storyPoints { get; set; }
 
-        private DateTime dataRealInicio { get; set; }
-        private DateTime dataRealFim { get; set;}
+        public DateTime dataRealInicio { get; set; }
+        public DateTime dataRealFim { get; set;}
 
-        private DateTime dataCriacao { get; set;}
+        public DateTime dataCriacao { get; set;}
 
-        private string estadoAtual { get; set; }
+        public string estadoAtual { get; set; }
     }
 }

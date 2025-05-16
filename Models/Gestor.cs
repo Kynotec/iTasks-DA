@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace iTasks.Models
 {
-    internal class Gestor:Utilizador
+    public class Gestor:Utilizador
     {
-       private string departamento { get; set; }
-       private bool gereUtilizadores { get; set; }
+       public string departamento { get; set; }
+        public bool gereUtilizadores { get; set; }
         
     }
 
