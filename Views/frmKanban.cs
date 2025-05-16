@@ -16,5 +16,13 @@ namespace iTasks
         {
             InitializeComponent();
         }
+
+        private void gerirUtilizadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmGereUtilizadores frmGere = new frmGereUtilizadores();
+            frmGere.ShowDialog();
+            this.Close();
+        }
     }
 }
