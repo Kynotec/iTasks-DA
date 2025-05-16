@@ -10,9 +10,9 @@ namespace iTasks.Models
     {
 
         public int id { get; set; }
-        public int idGestor { get; set; }
+        public  Gestor  gestor{ get; set; }
 
-        public int idProgramador { get; set; }
+        public  Programador programador{ get; set; }
 
         public int ordemExecucao { get; set; }
 
@@ -22,7 +22,7 @@ namespace iTasks.Models
 
         public DateTime dataPrevistaFim { get; set; }
 
-        public int idTipoTarefa { get; set; }
+        public TipoTarefa tipotarefa { get; set; }
 
         public int storyPoints { get; set; }
 

@@ -29,7 +29,7 @@ namespace iTasks.Controllers
                     var user = _dbContext.Utilizadores.FirstOrDefault(u =>
                     u.username == username && u.password == password);
 
-                    //Se o username e a password forem diferentes de null dá retuqrn true
+                    //Se o username e a password forem diferentes de null dá return true
                     if( user != null)
                     {
                         return true;
