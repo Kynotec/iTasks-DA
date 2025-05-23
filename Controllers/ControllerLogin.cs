@@ -18,6 +18,12 @@ namespace iTasks.Controllers
         {
             
         }
+        public Utilizador UtilizadorAutenticado { get;  set; }
+
+        public void UserAutenticado(Utilizador utilizador)
+        {
+            UtilizadorAutenticado = utilizador;
+        }
 
         public bool  Login(string username, string password)
         {     
@@ -32,6 +38,7 @@ namespace iTasks.Controllers
                     //Se o username e a password forem diferentes de null dá return true
                     if( user != null)
                     {
+                     UtilizadorAutenticado = user;
                         return true;
                     }
                     else
@@ -43,10 +50,13 @@ namespace iTasks.Controllers
             }
             catch (Exception ex)
             {
+                //Se não conseguir ter ligação com a base de dados dá o erro
                 MessageBox.Show($"Erro de acesso à BD: {ex.Message}");
                 return false;
             }
            
         }
+
+       
     }
 }
