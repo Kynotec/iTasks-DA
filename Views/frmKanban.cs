@@ -45,6 +45,7 @@ namespace iTasks
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             //Sair da Aplicação
             this.Close();
         }
@@ -65,6 +66,15 @@ namespace iTasks
             frmGereTiposTarefas frmGereTiposTarefas = new frmGereTiposTarefas();
             frmGereTiposTarefas.ShowDialog();
             this.Close();
+
+            this.Close();
+        }
+
+        private void gerirUtilizadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmGereUtilizadores frmGereUtilizadores = new frmGereUtilizadores();
+            frmGereUtilizadores.ShowDialog();
+
         }
     }
 }
