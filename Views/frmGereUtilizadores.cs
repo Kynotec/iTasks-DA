@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace iTasks
 {
@@ -17,23 +18,44 @@ namespace iTasks
         public frmGereUtilizadores()
         {
             InitializeComponent();
+            lstListaGestores.Items.Clear();
+            
+            //Limpar a datasource
+            cbDepartamento.DataSource = null;
+            //Buscar os dados do departamento e inserir na combobox
+            cbDepartamento.DataSource = Enum.GetValues(typeof(departamento));
+
+            //Limpar a datasource
+            cbNivelProg.DataSource = null; 
+            //Buscar os dados do niveldeexperiencia e inserir na combobox
+            cbNivelProg.DataSource = Enum.GetValues(typeof(nivelExperiencia));
+            
+            //Criação de uma nova instancia da ClasseUtilizador para aceder á função
+            var controller = new ControllerUtilizador();
+
+            //chamar a função e atribuir a função ao datasource da lista dos gestores
+            var listaGestores = controller.GetGestores();
+            lstListaGestores.DataSource = listaGestores;
+
+            //chamar a função e atribuir a função ao datasource da lista dos programadores
+            var listaProgramadores = controller.GetProgramadores();
+            lstListaProgramadores.DataSource = listaProgramadores;
         }
+
+       
 
         private void btGravarGestor_Click(object sender, EventArgs e)
         {
             var controller = new ControllerUtilizador();
-            bool dadosRegisto = controller.GravarGestor(txtNomeGestor.Text, txtUsernameGestor.Text, txtPasswordGestor.Text);
-            using (var db = new TarefaContext())
+
+            bool dadosRegisto = controller.GravarGestor(txtNomeGestor.Text, txtUsernameGestor.Text, txtPasswordGestor.Text, (departamento)cbDepartamento.SelectedItem);
+
             if (dadosRegisto)
             {
-                
-                var gestor = new Gestor { nome = txtNomeGestor.Text, username = txtUsernameGestor.Text , password = txtPasswordGestor.Text};
-                db.Gestores.Add(gestor);
+
+                MessageBox.Show("Dados inseridos com sucesso!");
             }
-            else
-            {
-                MessageBox.Show("Erro ao registar gestor.");
-            }
+            
 
         }
     }

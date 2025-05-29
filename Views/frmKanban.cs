@@ -45,20 +45,25 @@ namespace iTasks
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Sair da Aplicação
             this.Close();
         }
 
-        private void gerirUtilizadoresToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmGereUtilizadores frmGereUtilizadores = new frmGereUtilizadores();
-            frmGereUtilizadores.ShowDialog();
-        }
 
         private void gerirUtilizadoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Criar uma nova instancia do formulário e abrir o mesmo
             this.Hide();
-            frmGereUtilizadores frmGere = new frmGereUtilizadores();
-            frmGere.ShowDialog();
+            frmGereUtilizadores frmGereUtilizadores = new frmGereUtilizadores();
+            frmGereUtilizadores.ShowDialog();
+            this.Close();
+        }
+
+        private void gerirTiposDeTarefasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Criar uma nova instancia do formulário e abrir o mesmo
+            frmGereTiposTarefas frmGereTiposTarefas = new frmGereTiposTarefas();
+            frmGereTiposTarefas.ShowDialog();
             this.Close();
         }
     }

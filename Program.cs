@@ -25,7 +25,7 @@ namespace iTasks
             }*/
            
 
-            /*
+           /* 
             using (var db = new TarefaContext())
             {
                 var admin = new Gestor { nome = "admin", username = "admin" , password = "admin"};

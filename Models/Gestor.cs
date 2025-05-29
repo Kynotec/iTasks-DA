@@ -11,9 +11,16 @@ namespace iTasks.Models
         
         public bool gereUtilizadores { get; set; }
         public departamento Departamento { get; set; }
-        
+
+        public override string  ToString()
+        {
+
+            return $"Nome: {nome}";
+        }
+
     }
       public enum departamento { IT, Marketing, Administracao }
 
 
+    
 }
