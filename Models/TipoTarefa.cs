@@ -12,5 +12,10 @@ namespace iTasks.Models
 
         public string nome { get; set; }
 
+        public override string ToString()
+        {
+            return $"{id} - {nome}";
+        }
+
     }
 }
