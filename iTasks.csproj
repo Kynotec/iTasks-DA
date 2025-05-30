@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\ControllerLogin.cs" />
+    <Compile Include="Controllers\ControllerUtilizador.cs" />
     <Compile Include="Models\Tarefa.cs" />
     <Compile Include="Models\TarefaContext.cs" />
     <Compile Include="Models\TipoTarefa.cs" />

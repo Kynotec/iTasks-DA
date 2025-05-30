@@ -8,10 +8,19 @@ namespace iTasks.Models
 {
     public class Gestor:Utilizador
     {
-       public string departamento { get; set; }
-        public bool gereUtilizadores { get; set; }
         
+        public bool gereUtilizadores { get; set; }
+        public departamento Departamento { get; set; } 
+
+        public override string  ToString()
+        {
+
+            return $"{nome}";
+        }
+
     }
+      public enum departamento { IT, Marketing, Administracao }
 
 
+    
 }

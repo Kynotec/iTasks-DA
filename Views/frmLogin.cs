@@ -23,13 +23,14 @@ namespace iTasks
             //Criação de uma nova instancia da classe ControllerLogin para aceder ás funções da classe
             var controller = new ControllerLogin(); 
             bool sucesso = controller.Login(txtUsername.Text, txtPassword.Text);
-            var username = txtUsername.Text;
+            
             
             if (sucesso)
             {
                 MessageBox.Show("Login bem-sucedido!");
                 this.Hide();
-                frmKanban frmkanban = new frmKanban();
+                //mandar por parametro no formulário kanban o modelo do utilizador
+                frmKanban frmkanban = new frmKanban(controller.UtilizadorAutenticado);
                 frmkanban.ShowDialog();
                 this.Close();
             }

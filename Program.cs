@@ -15,18 +15,33 @@ namespace iTasks
         /// </summary>
         [STAThread]
         static void Main()
-        { /*
+        { 
+
+
+            /*using (var db = new TarefaContext())
+            {
+                var admin = new Gestor { nome = "admin", username = "admin" , password = "admin"};
+                db.Gestores.Add(admin);
+                db.SaveChanges(); 
+            }*/
+           
+
+           /* 
+
+            /*
+
             using (var db = new TarefaContext())
             {
                 var admin = new Gestor { nome = "admin", username = "admin" , password = "admin"};
                 db.Gestores.Add(admin);
                
                 var programador = new Programador { nome = "programador1", username = "programador1", password = "programador1", gestor=admin, nivelExperiencia= nivelExperiencia.Junior };
-                db.Programador.Add(programador);
+                db.Programadores.Add(programador);
                
             db.SaveChanges(); 
             }
             */
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmGereTiposTarefas());
