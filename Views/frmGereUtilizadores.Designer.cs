@@ -135,6 +135,7 @@
             this.lstListaGestores.Name = "lstListaGestores";
             this.lstListaGestores.Size = new System.Drawing.Size(357, 537);
             this.lstListaGestores.TabIndex = 0;
+            this.lstListaGestores.SelectedIndexChanged += new System.EventHandler(this.lstListaGestores_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -358,6 +359,7 @@
             this.lstListaProgramadores.Name = "lstListaProgramadores";
             this.lstListaProgramadores.Size = new System.Drawing.Size(357, 537);
             this.lstListaProgramadores.TabIndex = 0;
+            this.lstListaProgramadores.SelectedIndexChanged += new System.EventHandler(this.lstListaProgramadores_SelectedIndexChanged_1);
             // 
             // txtIdProg
             // 

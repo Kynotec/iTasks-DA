@@ -76,5 +76,50 @@ namespace iTasks
                 MessageBox.Show("Programador criado com sucesso!");
             }
         }
+
+        private void lstListaGestores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            Utilizador utilizador = (Utilizador)lstListaGestores.SelectedItem;
+            Gestor gestor = (Gestor)lstListaGestores.SelectedItem;
+            if (utilizador == null)
+            {
+                return;
+            }
+            if (gestor == null)
+            {
+                return;
+            }
+
+            // preencher os campos com os dados do gestor selecionado
+            txtIdGestor.Text = gestor.id.ToString();
+            txtNomeGestor.Text = utilizador.nome;
+            txtUsernameGestor.Text = utilizador.username;
+            txtPasswordGestor.Text = utilizador.password;
+            cbDepartamento.SelectedItem = gestor.Departamento;
+            chkGereUtilizadores.Checked = gestor.gereUtilizadores;
+        }
+
+        private void lstListaProgramadores_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            Utilizador utilizador = (Utilizador)lstListaGestores.SelectedItem;
+            Programador programador = (Programador)lstListaProgramadores.SelectedItem;
+            // Gestor gestor = (Gestor)lstListaGestores.SelectedItem;
+            if (utilizador == null)
+            {
+                return;
+            }
+            if (programador == null)
+            {
+                return;
+            }
+
+            // preencher os campos com os dados do gestor selecionado
+            txtNomeProg.Text = programador.nome;
+            txtUsernameProg.Text = programador.username;
+            txtPasswordProg.Text = programador.password;
+            cbNivelProg.SelectedItem = programador.nivelExperiencia;
+            cbGestorProg.SelectedItem = programador.gestor; // não está a funcionar
+        }
     }
 }
