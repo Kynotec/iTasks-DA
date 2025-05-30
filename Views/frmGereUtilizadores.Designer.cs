@@ -289,6 +289,7 @@
             this.btGravarProg.TabIndex = 37;
             this.btGravarProg.Text = "Gravar Dados";
             this.btGravarProg.UseVisualStyleBackColor = true;
+            this.btGravarProg.Click += new System.EventHandler(this.btGravarProg_Click);
             // 
             // txtPasswordProg
             // 

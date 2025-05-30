@@ -14,8 +14,7 @@ namespace iTasks.Models
 
         public override string ToString()
         {
-
-            return $"Nome: {nome}";
+            return $"{nome}";
         }
     }
     public enum nivelExperiencia { Junior, Senior }

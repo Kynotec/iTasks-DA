@@ -30,15 +30,18 @@ namespace iTasks
             //Buscar os dados do niveldeexperiencia e inserir na combobox
             cbNivelProg.DataSource = Enum.GetValues(typeof(nivelExperiencia));
             
-            //Criação de uma nova instancia da ClasseUtilizador para aceder á função
-            var controller = new ControllerUtilizador();
+            //Criação de uma nova instancia da Classe ControllerUtilizador para aceder á função
+            var controller_user = new ControllerUtilizador();
 
             //chamar a função e atribuir a função ao datasource da lista dos gestores
-            var listaGestores = controller.GetGestores();
+            var listaGestores = controller_user.GetGestores();
             lstListaGestores.DataSource = listaGestores;
 
+            var listGest = controller_user.GetGestores();
+            cbGestorProg.DataSource = listGest;
+
             //chamar a função e atribuir a função ao datasource da lista dos programadores
-            var listaProgramadores = controller.GetProgramadores();
+            var listaProgramadores = controller_user.GetProgramadores();
             lstListaProgramadores.DataSource = listaProgramadores;
         }
 
@@ -46,17 +49,32 @@ namespace iTasks
 
         private void btGravarGestor_Click(object sender, EventArgs e)
         {
-            var controller = new ControllerUtilizador();
+            //Criação de uma nova instância do ControllerUtilizador
+            var controller_user = new ControllerUtilizador();
 
-            bool dadosRegisto = controller.GravarGestor(txtNomeGestor.Text, txtUsernameGestor.Text, txtPasswordGestor.Text, (departamento)cbDepartamento.SelectedItem, chkGereUtilizadores.Checked);
+            //Chamada da função Gravar Gestor
+            bool dadosRegisto_Gestores = controller_user.GravarGestor(txtNomeGestor.Text, txtUsernameGestor.Text, txtPasswordGestor.Text, (departamento)cbDepartamento.SelectedItem, chkGereUtilizadores.Checked);
 
-            if (dadosRegisto)
+            //Se true os dados são guardados e uma mensagem será mandada
+            if (dadosRegisto_Gestores)
             {
-
-                MessageBox.Show("Dados inseridos com sucesso!");
+                MessageBox.Show("Gestor criado com sucesso!");
             }
-            
+        }
 
+        private void btGravarProg_Click(object sender, EventArgs e)
+        {
+            //Criação de uma nova instância do ControllerUtilizador
+            var controller_user = new ControllerUtilizador();
+
+            //Chamada da função Gravar Gestor
+            bool dadosRegisto_Prog = controller_user.GravarProgramador(txtNomeProg.Text, txtUsernameProg.Text, txtPasswordProg.Text, (nivelExperiencia)cbNivelProg.SelectedItem, (Gestor)cbGestorProg.SelectedItem);
+
+            //Se true os dados são guardados e uma mensagem será mandada
+            if (dadosRegisto_Prog)
+            {
+                MessageBox.Show("Programador criado com sucesso!");
+            }
         }
     }
 }

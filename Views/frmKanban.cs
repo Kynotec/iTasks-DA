@@ -65,8 +65,6 @@ namespace iTasks
             frmGereTiposTarefas frmGereTiposTarefas = new frmGereTiposTarefas();
             frmGereTiposTarefas.ShowDialog();
             this.Close();
-
-            this.Close();
         }
     }
 }
