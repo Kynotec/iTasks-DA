@@ -20,27 +20,26 @@ namespace iTasks
         {
             InitializeComponent();
            
-            //Atribuir os dados do utilizador autenticado numa variável
+            // atribuir os dados do utilizador autenticado numa variável
             this.utilizadorAutenticado = userAutenticado;
-            //Seleção do username do utilizador autenticado
+            // seleção do username do utilizador autenticado
             string username;
+            
             username = userAutenticado.username;
 
-            //atribuir á label o username do utilizador autenticado
+            // atribuir á label o username do utilizador autenticado
             label1.Text = "Bem-vindo " + username;
 
-            if (utilizadorAutenticado is Gestor gestor)
+            // verificar se o utilizador é gestor e se tem autorização para gerir utilizadores
+            if (utilizadorAutenticado is Gestor gestor && gestor.gereUtilizadores)
             {
-
+                // não vai remover o acesso ao gestor de utilizadores pois é um gestor e tem autorização para gerir utilizadores
             }
-            else 
-                
-            if(utilizadorAutenticado is Programador programador) 
-            { 
-                //Vai remover o acesso ao gestor de utilizadores pois é um programador e não gestor
+            else
+            {
+                // vai remover o acesso ao gestor de utilizadores pois é um programador e não gestor
                 gerirUtilizadoresToolStripMenuItem.Visible = false;
-            }   
-
+            }
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,7 +68,5 @@ namespace iTasks
 
             this.Close();
         }
-
-      
     }
 }

@@ -48,7 +48,7 @@ namespace iTasks
         {
             var controller = new ControllerUtilizador();
 
-            bool dadosRegisto = controller.GravarGestor(txtNomeGestor.Text, txtUsernameGestor.Text, txtPasswordGestor.Text, (departamento)cbDepartamento.SelectedItem);
+            bool dadosRegisto = controller.GravarGestor(txtNomeGestor.Text, txtUsernameGestor.Text, txtPasswordGestor.Text, (departamento)cbDepartamento.SelectedItem, chkGereUtilizadores.Checked);
 
             if (dadosRegisto)
             {

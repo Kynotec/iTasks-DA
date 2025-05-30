@@ -12,13 +12,13 @@ namespace iTasks.Controllers
     internal class ControllerUtilizador
     {
         // está sem departamento e sem o coiso de gerir utilizadores
-        public bool GravarGestor(string nome, string username, string password, departamento departamento)
+        public bool GravarGestor(string nome, string username, string password, departamento departamento, bool gereUtilizadores)
         {
             try
             {
                 using (TarefaContext _dbContext = new TarefaContext())
                 {
-                    var gestor = new Gestor { nome = nome, username = username, password = password, Departamento = departamento };
+                    var gestor = new Gestor { nome = nome, username = username, password = password, Departamento = departamento, gereUtilizadores = gereUtilizadores};
                     _dbContext.Gestores.Add(gestor);
                     _dbContext.SaveChanges();
                     return true;

@@ -10,7 +10,7 @@ namespace iTasks.Models
     {
         
         public bool gereUtilizadores { get; set; }
-        public departamento Departamento { get; set; }
+        public departamento Departamento { get; set; } 
 
         public override string  ToString()
         {
