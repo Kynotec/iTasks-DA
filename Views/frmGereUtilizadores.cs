@@ -45,21 +45,45 @@ namespace iTasks
             lstListaProgramadores.DataSource = listaProgramadores;
         }
 
-       
+
 
         private void btGravarGestor_Click(object sender, EventArgs e)
         {
-            //Criação de uma nova instância do ControllerUtilizador
             var controller_user = new ControllerUtilizador();
+            string nome = txtNomeGestor.Text;
 
-            //Chamada da função Gravar Gestor
-            bool dadosRegisto_Gestores = controller_user.GravarGestor(txtNomeGestor.Text, txtUsernameGestor.Text, txtPasswordGestor.Text, (departamento)cbDepartamento.SelectedItem, chkGereUtilizadores.Checked);
+            // Verifica se o gestor já existe 
+            bool gestorExiste = controller_user.GestorExiste(nome);
 
-            //Se true os dados são guardados e uma mensagem será mandada
-            if (dadosRegisto_Gestores)
+            bool resultado;
+            if (gestorExiste)
             {
-                MessageBox.Show("Gestor criado com sucesso!");
+                // Atualiza se já existe
+                resultado = controller_user.AtualizarGestor(nome, txtUsernameGestor.Text,txtPasswordGestor.Text,(departamento)cbDepartamento.SelectedItem,chkGereUtilizadores.Checked);
+                if (resultado)
+                    MessageBox.Show("Gestor atualizado com sucesso!");
+                //Atualização da listbox
+                //Refresh da lista
+                lstListaGestores.DataSource = null;
+                var listaGestores = controller_user.GetGestores();
+                lstListaGestores.DataSource = listaGestores;
             }
+            else
+            {
+                // Cria se não existe
+                resultado = controller_user.GravarGestor(nome, txtUsernameGestor.Text, txtPasswordGestor.Text,(departamento)cbDepartamento.SelectedItem,chkGereUtilizadores.Checked);
+                if (resultado)
+                    MessageBox.Show("Gestor criado com sucesso!");
+                
+                //Atualização da listbox
+                //Refresh da lista
+                lstListaGestores.DataSource = null;
+                var listaGestores = controller_user.GetGestores();
+                lstListaGestores.DataSource = listaGestores;
+            }
+
+            if (!resultado)
+                MessageBox.Show("Ocorreu um erro ao gravar/atualizar o gestor.");
         }
 
         private void btGravarProg_Click(object sender, EventArgs e)
@@ -74,6 +98,11 @@ namespace iTasks
             if (dadosRegisto_Prog)
             {
                 MessageBox.Show("Programador criado com sucesso!");
+                //Atualização da listbox
+                //Refresh da lista
+                lstListaProgramadores.DataSource = null;
+                var listaProgramadores = controller_user.GetProgramadores();
+                lstListaProgramadores.DataSource = listaProgramadores;
             }
         }
 

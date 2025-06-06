@@ -34,6 +34,48 @@ namespace iTasks.Controllers
             }
         }
 
+        public bool AtualizarGestor(string nome, string username, string password, departamento departamento, bool gereUtilizadores)
+        {
+            try
+            {
+                using (TarefaContext _dbContext = new TarefaContext())
+                {
+                    // Procurar o gestor existente pelo nome
+                    var gestor = _dbContext.Gestores.FirstOrDefault(g => g.nome == nome);
+
+                    if (gestor == null)
+                    {
+                        MessageBox.Show("Gestor não encontrado.");
+                        return false;
+                    }
+
+                    // Atualizar os campos
+                    gestor.username = username;
+                    gestor.password = password;
+                    gestor.Departamento = departamento;
+                    gestor.gereUtilizadores = gereUtilizadores;
+
+                    // Salvar as alterações
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro de acesso à BD: {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool GestorExiste(string nome)
+        {
+            using (TarefaContext _dbContext = new TarefaContext())
+            {
+                return _dbContext.Gestores.Any(g => g.nome == nome);
+            }
+        }
+
+
         public bool GravarProgramador(string nome, string username, string password, nivelExperiencia nivelExperiencia, Gestor gestor)
         {
             try
