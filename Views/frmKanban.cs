@@ -64,7 +64,16 @@ namespace iTasks
             //Criar uma nova instancia do formulário e abrir o mesmo
             frmGereTiposTarefas frmGereTiposTarefas = new frmGereTiposTarefas();
             frmGereTiposTarefas.ShowDialog();
-            this.Close();
+            
+        }
+
+        private void btNova_Click(object sender, EventArgs e)
+        {
+            // Cria uma nova instância do formulário frmDetalhesTarefa
+            frmDetalhesTarefa detalhesForm = new frmDetalhesTarefa();
+
+            // Abre o formulário como janela modal
+            detalhesForm.ShowDialog();
         }
     }
 }

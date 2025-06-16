@@ -135,5 +135,11 @@ namespace iTasks
             lstLista.ClearSelected(); // Desseleciona item da ListBox
             ActiveControl = txtDesc;  // Move o foco para o campo descrição
         }
+
+        private void btn_fechar_Click(object sender, EventArgs e)
+        {
+            // Fecha o formulário atual
+            this.Close();
+        }
     }
 }

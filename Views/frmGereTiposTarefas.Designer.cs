@@ -37,6 +37,7 @@
             this.btGravar = new System.Windows.Forms.Button();
             this.btn_apagar = new System.Windows.Forms.Button();
             this.btn_limpar = new System.Windows.Forms.Button();
+            this.btn_fechar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,11 +137,23 @@
             this.btn_limpar.UseVisualStyleBackColor = true;
             this.btn_limpar.Click += new System.EventHandler(this.btn_limpar_Click);
             // 
+            // btn_fechar
+            // 
+            this.btn_fechar.Location = new System.Drawing.Point(661, 442);
+            this.btn_fechar.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_fechar.Name = "btn_fechar";
+            this.btn_fechar.Size = new System.Drawing.Size(185, 28);
+            this.btn_fechar.TabIndex = 34;
+            this.btn_fechar.Text = "Fechar";
+            this.btn_fechar.UseVisualStyleBackColor = true;
+            this.btn_fechar.Click += new System.EventHandler(this.btn_fechar_Click);
+            // 
             // frmGereTiposTarefas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(885, 497);
+            this.Controls.Add(this.btn_fechar);
             this.Controls.Add(this.btn_limpar);
             this.Controls.Add(this.btn_apagar);
             this.Controls.Add(this.btGravar);
@@ -169,5 +182,6 @@
         private System.Windows.Forms.Button btGravar;
         private System.Windows.Forms.Button btn_apagar;
         private System.Windows.Forms.Button btn_limpar;
+        private System.Windows.Forms.Button btn_fechar;
     }
 }

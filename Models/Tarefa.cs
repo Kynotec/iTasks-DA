@@ -24,7 +24,7 @@ namespace iTasks.Models
 
         public TipoTarefa tipotarefa { get; set; }
 
-        public int storyPoints { get; set; }
+        public StoryPoints storyPoints { get; set; }
 
         public DateTime dataRealInicio { get; set; }
         public DateTime dataRealFim { get; set;}
@@ -32,5 +32,21 @@ namespace iTasks.Models
         public DateTime dataCriacao { get; set;}
 
         public string estadoAtual { get; set; }
+
+        public override string ToString()
+        {
+            return $"{tipotarefa}";
+        }
+    }
+
+    public enum StoryPoints
+    {
+        SP1 = 1,
+        SP2 = 2,
+        SP3 = 3,
+        SP5 = 5,
+        SP8 = 8,
+        SP13 = 13,
+        SP20 = 20
     }
 }

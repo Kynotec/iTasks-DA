@@ -26,9 +26,7 @@ namespace iTasks
             }*/
            
 
-           /* 
-
-            /*
+           /*
 
             using (var db = new TarefaContext())
             {
