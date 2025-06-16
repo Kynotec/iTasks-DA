@@ -40,8 +40,8 @@ namespace iTasks.Controllers
             {
                 using (TarefaContext _dbContext = new TarefaContext())
                 {
-                    // Procurar o gestor existente pelo nome
-                    var gestor = _dbContext.Gestores.FirstOrDefault(g => g.nome == nome);
+                    // Procurar o gestor existente pelo username
+                    var gestor = _dbContext.Gestores.FirstOrDefault(g => g.username == username);
 
                     if (gestor == null)
                     {
@@ -50,7 +50,7 @@ namespace iTasks.Controllers
                     }
 
                     // Atualizar os campos
-                    gestor.username = username;
+                    gestor.nome = nome;
                     gestor.password = password;
                     gestor.Departamento = departamento;
                     gestor.gereUtilizadores = gereUtilizadores;
@@ -67,11 +67,53 @@ namespace iTasks.Controllers
             }
         }
 
-        public bool GestorExiste(string nome)
+        public bool AtualizarProgramador(string nome, string username, string password, nivelExperiencia nivelExperiencia, Gestor gestor)
+        {
+            try
+            {
+                using (TarefaContext _dbContext = new TarefaContext())
+                {
+                    // Procurar o programador existente pelo username
+                    var prog = _dbContext.Programadores.FirstOrDefault(g => g.username == username);
+                    _dbContext.Gestores.Attach(gestor);
+                    if (prog == null)
+                    {
+                        MessageBox.Show("Programador não encontrado.");
+                        return false;
+                    }
+
+                    // Atualizar os campos
+                    prog.nome = nome;
+                    prog.password = password;
+                    prog.nivelExperiencia = nivelExperiencia;
+                    prog.gestor = gestor;
+                    
+
+                    // Salvar as alterações
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro de acesso à BD: {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool GestorExiste(string username)
         {
             using (TarefaContext _dbContext = new TarefaContext())
             {
-                return _dbContext.Gestores.Any(g => g.nome == nome);
+                return _dbContext.Gestores.Any(g => g.username == username);
+            }
+        }
+
+        public bool ProgramadorExiste(string username)
+        {
+            using (TarefaContext _dbContext = new TarefaContext())
+            {
+                return _dbContext.Programadores.Any(g => g.username == username);
             }
         }
 

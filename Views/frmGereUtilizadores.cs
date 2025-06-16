@@ -50,16 +50,16 @@ namespace iTasks
         private void btGravarGestor_Click(object sender, EventArgs e)
         {
             var controller_user = new ControllerUtilizador();
-            string nome = txtNomeGestor.Text;
+            string username = txtUsernameGestor.Text;
 
             // Verifica se o gestor já existe 
-            bool gestorExiste = controller_user.GestorExiste(nome);
+            bool gestorExiste = controller_user.GestorExiste(username);
 
             bool resultado;
             if (gestorExiste)
             {
                 // Atualiza se já existe
-                resultado = controller_user.AtualizarGestor(nome, txtUsernameGestor.Text,txtPasswordGestor.Text,(departamento)cbDepartamento.SelectedItem,chkGereUtilizadores.Checked);
+                resultado = controller_user.AtualizarGestor(txtNomeGestor.Text, username,txtPasswordGestor.Text,(departamento)cbDepartamento.SelectedItem,chkGereUtilizadores.Checked);
                 if (resultado)
                     MessageBox.Show("Gestor atualizado com sucesso!");
                 //Atualização da listbox
@@ -71,7 +71,7 @@ namespace iTasks
             else
             {
                 // Cria se não existe
-                resultado = controller_user.GravarGestor(nome, txtUsernameGestor.Text, txtPasswordGestor.Text,(departamento)cbDepartamento.SelectedItem,chkGereUtilizadores.Checked);
+                resultado = controller_user.GravarGestor(txtNomeGestor.Text, username, txtPasswordGestor.Text,(departamento)cbDepartamento.SelectedItem,chkGereUtilizadores.Checked);
                 if (resultado)
                     MessageBox.Show("Gestor criado com sucesso!");
                 
@@ -88,23 +88,43 @@ namespace iTasks
 
         private void btGravarProg_Click(object sender, EventArgs e)
         {
-            //Criação de uma nova instância do ControllerUtilizador
             var controller_user = new ControllerUtilizador();
+            string username = txtUsernameProg.Text;
 
-            //Chamada da função Gravar Gestor
-            bool dadosRegisto_Prog = controller_user.GravarProgramador(txtNomeProg.Text, txtUsernameProg.Text, txtPasswordProg.Text, (nivelExperiencia)cbNivelProg.SelectedItem, (Gestor)cbGestorProg.SelectedItem);
+            // Verifica se o programador já existe 
+            bool progExiste = controller_user.ProgramadorExiste(username);
 
-            //Se true os dados são guardados e uma mensagem será mandada
-            if (dadosRegisto_Prog)
+            bool resultado;
+            if (progExiste)
             {
-                MessageBox.Show("Programador criado com sucesso!");
+                // Atualiza se já existe
+                resultado = controller_user.AtualizarProgramador(txtNomeProg.Text, username, txtPasswordProg.Text, (nivelExperiencia)cbNivelProg.SelectedItem,(Gestor)cbGestorProg.SelectedItem);
+                if (resultado)
+                    MessageBox.Show("Programador atualizado com sucesso!");
                 //Atualização da listbox
                 //Refresh da lista
                 lstListaProgramadores.DataSource = null;
-                var listaProgramadores = controller_user.GetProgramadores();
-                lstListaProgramadores.DataSource = listaProgramadores;
+                var listaProg = controller_user.GetProgramadores();
+                lstListaProgramadores.DataSource = listaProg;
             }
+            else
+            {
+                // Cria se não existe
+                resultado = controller_user.GravarProgramador(txtNomeProg.Text, username, txtPasswordProg.Text, (nivelExperiencia)cbNivelProg.SelectedItem, (Gestor)cbGestorProg.SelectedItem);
+                if (resultado)
+                    MessageBox.Show("Programador criado com sucesso!");
+
+                //Atualização da listbox
+                //Refresh da lista
+                lstListaProgramadores.DataSource = null;
+                var listaProg = controller_user.GetProgramadores();
+                lstListaProgramadores.DataSource = listaProg;
+            }
+
+            if (!resultado)
+                MessageBox.Show("Ocorreu um erro ao gravar/atualizar o programador.");
         }
+
 
         private void lstListaGestores_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -144,6 +164,7 @@ namespace iTasks
             }
 
             // preencher os campos com os dados do gestor selecionado
+            txtIdProg.Text = programador.id.ToString();
             txtNomeProg.Text = programador.nome;
             txtUsernameProg.Text = programador.username;
             txtPasswordProg.Text = programador.password;
