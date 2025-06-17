@@ -34,6 +34,7 @@ namespace iTasks
         private void btGravar_Click(object sender, EventArgs e)
         {
             var controller_tarefas = new ControllerTarefas();
+            Tarefa novaTarefa = new Tarefa();
 
             string descricao = txtDesc.Text.Trim();
 
@@ -50,18 +51,29 @@ namespace iTasks
                 return;
             }
 
-            // Exemplo de validação simples:
+            // Validação da data
             if (dtInicio.Value.Date > dtFim.Value.Date)
             {
                 MessageBox.Show("A data prevista de início não pode ser depois da data prevista de fim.");
                 return;
             }
 
+            // Obtém as datas selecionadas
+            DateTime dataInicio = dtInicio.Value;
+            DateTime dataFim = dtFim.Value;
+            
             bool resultado;
 
-            resultado = controller_tarefas.CriarTarefa(novaTarefa);
+            resultado = controller_tarefas.CriarTarefa(txtDesc.Text, (TipoTarefa)cbTipoTarefa.SelectedItem, (Programador)cbProgramador.SelectedItem,ordem ,(StoryPoints)cbStoryPoints.SelectedItem, dataInicio, dataFim);
 
             MessageBox.Show("Tarefa gravada com sucesso!");
+
+        }
+
+        private void btFechar_Click(object sender, EventArgs e)
+        {
+           //fecha o formulário aberto
+            this.Close();
         }
     }
 }

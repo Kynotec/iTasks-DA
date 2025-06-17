@@ -9,9 +9,13 @@ namespace iTasks.Models
     public class Tarefa
     {
 
-        public int id { get; set; }
-        public  Gestor  gestor{ get; set; }
+        public int Id { get; set; }
 
+        public int? IdGestor { get; set; }
+        public  Gestor  gestor{ get; set; }
+       
+
+        public int? IdProgramador { get; set; }
         public  Programador programador{ get; set; }
 
         public int ordemExecucao { get; set; }
@@ -22,6 +26,7 @@ namespace iTasks.Models
 
         public DateTime dataPrevistaFim { get; set; }
 
+        public int? IdTipoTarefa { get; set; }
         public TipoTarefa tipotarefa { get; set; }
 
         public StoryPoints storyPoints { get; set; }
@@ -31,12 +36,17 @@ namespace iTasks.Models
 
         public DateTime dataCriacao { get; set;}
 
-        public string estadoAtual { get; set; }
+        public EstadoAtual estadoAtual { get; set; }
 
         public override string ToString()
         {
-            return $"{tipotarefa}";
+            return $"Descrição: {descricao}, " +
+                   $"Ordem: {ordemExecucao}, " +
+                   $"StoryPoints: {storyPoints}, " +
+                   $"Data Prevista de Início: {dataPrevistaInicio:dd/MM/yyyy}, " +
+                   $"Data Prevista de Fim: {dataPrevistaFim:dd/MM/yyyy}";
         }
+
     }
 
     public enum StoryPoints
@@ -49,4 +59,6 @@ namespace iTasks.Models
         SP13 = 13,
         SP20 = 20
     }
+
+    public enum EstadoAtual { ToDo, Doing, Done }
 }

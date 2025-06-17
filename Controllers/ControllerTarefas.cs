@@ -44,12 +44,27 @@ namespace iTasks.Controllers
             }
         }
 
-        public bool CriarTarefa(Tarefa novaTarefa)
+        public bool CriarTarefa(string descricao, TipoTarefa tipotarefa, Programador programador, int ordem, StoryPoints storyPoints, DateTime dataPrevistaInicio, DateTime dataPrevistaFim)
         {
             try
             {
                 using (TarefaContext _dbContext = new TarefaContext())
                 {
+                    var novaTarefa = new Tarefa {
+                        descricao = descricao,
+                        IdTipoTarefa = tipotarefa.id,
+                        IdProgramador = programador.id, 
+                        ordemExecucao = ordem,
+                        storyPoints = storyPoints,
+                        dataPrevistaInicio = dataPrevistaInicio,
+                        dataPrevistaFim = dataPrevistaFim,
+                        dataCriacao = DateTime.Now,
+                        dataRealInicio = DateTime.Now,
+                        dataRealFim = DateTime.Now,
+                        estadoAtual = EstadoAtual.ToDo
+                    };
+
+                    //Guardar os dados e salvar na bd
                     _dbContext.Tarefas.Add(novaTarefa);
                     _dbContext.SaveChanges();
                     return true;
@@ -68,7 +83,7 @@ namespace iTasks.Controllers
             {
                 using (TarefaContext _dbContext = new TarefaContext())
                 {
-                    var existente = _dbContext.Tarefas.FirstOrDefault(t => t.id == tarefa.id);
+                    var existente = _dbContext.Tarefas.FirstOrDefault(t => t.Id == tarefa.Id);
                     if (existente != null)
                     {
                         existente.descricao = tarefa.descricao;
@@ -103,7 +118,7 @@ namespace iTasks.Controllers
             {
                 using (TarefaContext _dbContext = new TarefaContext())
                 {
-                    var tarefa = _dbContext.Tarefas.FirstOrDefault(t => t.id == tarefaId);
+                    var tarefa = _dbContext.Tarefas.FirstOrDefault(t => t.Id == tarefaId);
                     if (tarefa != null)
                     {
                         _dbContext.Tarefas.Remove(tarefa);

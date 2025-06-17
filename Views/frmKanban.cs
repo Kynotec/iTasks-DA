@@ -1,4 +1,5 @@
-﻿using iTasks.Models;
+﻿using iTasks.Controllers;
+using iTasks.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,12 @@ namespace iTasks
                 // vai remover o acesso ao gestor de utilizadores pois é um programador e não gestor
                 gerirUtilizadoresToolStripMenuItem.Visible = false;
             }
+
+
+            var controller_tarefas = new ControllerTarefas();
+            var list_tarefa = controller_tarefas.GetTarefas();
+            lstTodo.DataSource = list_tarefa;
+
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)

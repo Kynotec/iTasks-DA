@@ -26,8 +26,8 @@ namespace iTasks
             }*/
            
 
+           
            /*
-
             using (var db = new TarefaContext())
             {
                 var admin = new Gestor { nome = "admin", username = "admin" , password = "admin"};
@@ -35,11 +35,14 @@ namespace iTasks
                
                 var programador = new Programador { nome = "programador1", username = "programador1", password = "programador1", gestor=admin, nivelExperiencia= nivelExperiencia.Junior };
                 db.Programadores.Add(programador);
-               
-            db.SaveChanges(); 
-            }
-            */
 
+                var tipotarefa = new TipoTarefa { nome = "limpar pc"};
+                db.TipoTarefas.Add(tipotarefa);
+
+                db.SaveChanges(); 
+            }
+         
+            */
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmLogin());
