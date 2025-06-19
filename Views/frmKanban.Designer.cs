@@ -66,6 +66,7 @@
             this.lstTodo.Name = "lstTodo";
             this.lstTodo.Size = new System.Drawing.Size(395, 516);
             this.lstTodo.TabIndex = 0;
+            this.lstTodo.SelectedIndexChanged += new System.EventHandler(this.lstTodo_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -213,6 +214,7 @@
             this.btSetDoing.TabIndex = 5;
             this.btSetDoing.Text = "Executar Tarefa >>";
             this.btSetDoing.UseVisualStyleBackColor = true;
+            this.btSetDoing.Click += new System.EventHandler(this.btSetDoing_Click);
             // 
             // btSetDone
             // 
@@ -223,6 +225,7 @@
             this.btSetDone.TabIndex = 6;
             this.btSetDone.Text = "Terminar Tarefa >>";
             this.btSetDone.UseVisualStyleBackColor = true;
+            this.btSetDone.Click += new System.EventHandler(this.btSetDone_Click);
             // 
             // btSetTodo
             // 
@@ -233,6 +236,7 @@
             this.btSetTodo.TabIndex = 7;
             this.btSetTodo.Text = "<< Reiniciar Tarefa";
             this.btSetTodo.UseVisualStyleBackColor = true;
+            this.btSetTodo.Click += new System.EventHandler(this.btSetTodo_Click);
             // 
             // btNova
             // 

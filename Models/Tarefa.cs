@@ -60,5 +60,5 @@ namespace iTasks.Models
         SP20 = 20
     }
 
-    public enum EstadoAtual { ToDo, Doing, Done }
+    public enum EstadoAtual { ToDo = 0, Doing = 1, Done = 2 }
 }

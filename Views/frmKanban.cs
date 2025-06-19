@@ -13,53 +13,50 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace iTasks
 {
-    public partial class frmKanban : Form 
+    public partial class frmKanban : Form
     {
         private Utilizador utilizadorAutenticado;
 
         public frmKanban(Utilizador userAutenticado)
         {
             InitializeComponent();
-           
-            // atribuir os dados do utilizador autenticado numa variável
             this.utilizadorAutenticado = userAutenticado;
-            // seleção do username do utilizador autenticado
-            string username;
-            
-            username = userAutenticado.username;
-
-            // atribuir á label o username do utilizador autenticado
+            string username = userAutenticado.username;
             label1.Text = "Bem-vindo " + username;
 
-            // verificar se o utilizador é gestor e se tem autorização para gerir utilizadores
             if (utilizadorAutenticado is Gestor gestor && gestor.gereUtilizadores)
             {
-                // não vai remover o acesso ao gestor de utilizadores pois é um gestor e tem autorização para gerir utilizadores
+                // login :D
             }
             else
             {
-                // vai remover o acesso ao gestor de utilizadores pois é um programador e não gestor
                 gerirUtilizadoresToolStripMenuItem.Visible = false;
             }
 
+            LoadTasks();
+        }
 
+        private void LoadTasks()
+        {
             var controller_tarefas = new ControllerTarefas();
-            var list_tarefa = controller_tarefas.GetTarefas();
-            lstTodo.DataSource = list_tarefa;
+            var allTasks = controller_tarefas.GetTarefas();
 
+            lstTodo.DataSource = allTasks.Where(t => t.estadoAtual == EstadoAtual.ToDo).ToList();
+            lstDoing.DataSource = allTasks.Where(t => t.estadoAtual == EstadoAtual.Doing).ToList();
+            lstDone.DataSource = allTasks.Where(t => t.estadoAtual == EstadoAtual.Done).ToList();
+
+            lstTodo.ClearSelected();
+            lstDoing.ClearSelected();
+            lstDone.ClearSelected();
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            //Sair da Aplicação
             this.Close();
         }
 
-
         private void gerirUtilizadoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Criar uma nova instancia do formulário e abrir o mesmo
             this.Hide();
             frmGereUtilizadores frmGereUtilizadores = new frmGereUtilizadores();
             frmGereUtilizadores.ShowDialog();
@@ -68,19 +65,66 @@ namespace iTasks
 
         private void gerirTiposDeTarefasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Criar uma nova instancia do formulário e abrir o mesmo
             frmGereTiposTarefas frmGereTiposTarefas = new frmGereTiposTarefas();
             frmGereTiposTarefas.ShowDialog();
-            
         }
 
         private void btNova_Click(object sender, EventArgs e)
         {
-            // Cria uma nova instância do formulário frmDetalhesTarefa
             frmDetalhesTarefa detalhesForm = new frmDetalhesTarefa();
-
-            // Abre o formulário como janela modal
             detalhesForm.ShowDialog();
+        }
+
+        private void btSetDoing_Click(object sender, EventArgs e)
+        {
+            if (lstTodo.SelectedItem is Tarefa tarefaSelecionada)
+            {
+                var controller_tarefas = new ControllerTarefas();
+                tarefaSelecionada.estadoAtual = EstadoAtual.Doing;
+                controller_tarefas.AtualizarTarefa(tarefaSelecionada);
+                LoadTasks();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione uma tarefa para mudar o estado.");
+            }
+        }
+
+        private void lstTodo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // só estou a chamar isto
+            // não eliminar
+        }
+
+        private void btSetDone_Click(object sender, EventArgs e)
+        {
+            if (lstDoing.SelectedItem is Tarefa tarefaSelecionada)
+            {
+                var controller_tarefas = new ControllerTarefas();
+                tarefaSelecionada.estadoAtual = EstadoAtual.Done;
+                controller_tarefas.AtualizarTarefa(tarefaSelecionada);
+                LoadTasks();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione uma tarefa para mudar o estado.");
+            }
+        }
+
+        private void btSetTodo_Click(object sender, EventArgs e)
+        {
+            // n sei se é para reiniciar o done tbm mas prontos vai ser só o doing
+            if (lstDoing.SelectedItem is Tarefa tarefaSelecionada)
+            {
+                var controller_tarefas = new ControllerTarefas();
+                tarefaSelecionada.estadoAtual = EstadoAtual.ToDo;
+                controller_tarefas.AtualizarTarefa(tarefaSelecionada);
+                LoadTasks();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecione uma tarefa para mudar o estado.");
+            }
         }
     }
 }
