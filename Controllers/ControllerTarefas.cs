@@ -10,6 +10,7 @@ namespace iTasks.Controllers
 {
     internal class ControllerTarefas
     {
+        // Retorna todos os tipos de tarefas disponíveis na base de dados
         public List<TipoTarefa> GetTipoTarefas()
         {
             try
@@ -26,6 +27,7 @@ namespace iTasks.Controllers
             }
         }
 
+        // Retorna todas as tarefas existentes, ordenadas pela ordem de execução
         public List<Tarefa> GetTarefas()
         {
             try
@@ -44,6 +46,9 @@ namespace iTasks.Controllers
             }
         }
 
+
+        // Cria uma nova tarefa com os dados recebidos
+        // O estado atual começa como "ToDo", a data de criação é agora, e o ID é gerado automaticamente pelo banco de dados
         public bool CriarTarefa(string descricao, TipoTarefa tipotarefa, Programador programador, int ordem, StoryPoints storyPoints, DateTime dataPrevistaInicio, DateTime dataPrevistaFim)
         {
             try
@@ -77,6 +82,7 @@ namespace iTasks.Controllers
             }
         }
 
+        // Atualiza os dados de uma tarefa existente
         public bool AtualizarTarefa(Tarefa tarefa)
         {
             try
@@ -112,6 +118,7 @@ namespace iTasks.Controllers
             }
         }
 
+        // Remove uma tarefa com base no seu ID
         public bool RemoverTarefa(int tarefaId)
         {
             try
