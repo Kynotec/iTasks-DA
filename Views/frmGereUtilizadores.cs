@@ -171,5 +171,71 @@ namespace iTasks
             cbNivelProg.SelectedItem = programador.nivelExperiencia;
             cbGestorProg.SelectedItem = programador.gestor; // não está a funcionar
         }
+
+        private void btEliminarGestor_Click(object sender, EventArgs e)
+        {
+            // Verifica se algum gestor está selecionado
+            Gestor gestorSelecionado = (Gestor)lstListaGestores.SelectedItem;
+            if (gestorSelecionado == null)
+            {
+                MessageBox.Show("Por favor, selecione um gestor para eliminar!");
+                return;
+            }
+
+            // Confirmação
+            var confirm = MessageBox.Show(
+                $"Tem a certeza que deseja eliminar o gestor '{gestorSelecionado.nome}'?",
+                "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                var controller_user = new ControllerUtilizador();
+                bool sucesso = controller_user.EliminarGestor(gestorSelecionado.id);
+
+                if (sucesso)
+                {
+                    MessageBox.Show("Gestor eliminado com sucesso!");
+
+                    // Atualizar a lista de gestores
+                    lstListaGestores.DataSource = null;
+                    var listaGestores = controller_user.GetGestores();
+                    lstListaGestores.DataSource = listaGestores;
+                }
+      
+            }
+        }
+
+        private void btEliminarProg_Click(object sender, EventArgs e)
+        {
+            // Verifica se algum programador está selecionado
+            Programador progSelecionado = (Programador)lstListaProgramadores.SelectedItem;
+            if (progSelecionado == null)
+            {
+                MessageBox.Show("Por favor, selecione um programador para eliminar!");
+                return;
+            }
+
+            // Confirmação
+            var confirm = MessageBox.Show(
+                $"Tem a certeza que deseja eliminar o programador '{progSelecionado.nome}'?",
+                "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                var controller_user = new ControllerUtilizador();
+                bool sucesso = controller_user.EliminarProg(progSelecionado.id);
+
+                if (sucesso)
+                {
+                    MessageBox.Show("Programador eliminado com sucesso!");
+
+                    // Atualizar a lista dos programadores
+                    lstListaProgramadores.DataSource = null;
+                    var listaProg = controller_user.GetProgramadores();
+                    lstListaProgramadores.DataSource = listaProg;
+                }
+               
+            }
+        }
     }
 }

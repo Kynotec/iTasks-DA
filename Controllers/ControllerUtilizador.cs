@@ -176,7 +176,61 @@ namespace iTasks.Controllers
                 return new List<Programador>();
             }
         }
-        
+
+        public bool EliminarGestor(int gestorId)
+        {
+            try
+            {
+                using (TarefaContext _dbContext = new TarefaContext())
+                {
+                    var gestor = _dbContext.Gestores.FirstOrDefault(g => g.id == gestorId);
+                    if (gestor != null)
+                    {
+                        _dbContext.Gestores.Remove(gestor);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Gestor não encontrado!");
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao remover gestor: {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool EliminarProg(int progId)
+        {
+            try
+            {
+                using (TarefaContext _dbContext = new TarefaContext())
+                {
+                    var prog = _dbContext.Programadores.FirstOrDefault(p => p.id == progId);
+                    if (prog != null)
+                    {
+                        _dbContext.Programadores.Remove(prog);
+                        _dbContext.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Programador não encontrado!");
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao remover programador: {ex.Message}");
+                return false;
+            }
+        }
+
 
 
     }
