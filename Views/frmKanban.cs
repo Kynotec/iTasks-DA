@@ -153,5 +153,19 @@ namespace iTasks
                 MessageBox.Show("Por favor, selecione uma tarefa para mudar o estado.");
             }
         }
+
+        private void tarefasEmCursoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // abrir frmConsultaTarefasEmCurso
+            frmConsultaTarefasEmCurso frmConsultaTarefasEmCurso = new frmConsultaTarefasEmCurso();
+            frmConsultaTarefasEmCurso.ShowDialog();
+        }
+
+        private void tarefasTerminadasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // abrir frmConsultaTarefasEmConcluidas
+            frmConsultarTarefasConcluidas frmConsultaTarefasConcluidas = new frmConsultarTarefasConcluidas();
+            frmConsultaTarefasConcluidas.ShowDialog();
+        }
     }
 }
