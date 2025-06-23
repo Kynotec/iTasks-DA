@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,10 +34,17 @@ namespace iTasks
             {
                 // login
             }
-            else
+            else //Caso não seja gestor vai ter algumas restrições
             {
                 // Esconde o menu de gestão de utilizadores se não tiver permissões
                 gerirUtilizadoresToolStripMenuItem.Visible = false;
+
+                //Esconde o menu de visualização das tarefas em curso visto que não é um gestor
+                tarefasEmCursoToolStripMenuItem.Visible = false;
+
+                //Esconde o botão de exportar as tarefas concluidas para o formato CSV
+                exportarParaCSVToolStripMenuItem.Visible = false;
+
             }
 
             LoadTasks();
@@ -64,6 +72,7 @@ namespace iTasks
         // Evento para sair/fechar a aplicação
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Sair da aplicação
             this.Close();
         }
 
@@ -166,6 +175,32 @@ namespace iTasks
             // abrir frmConsultaTarefasEmConcluidas
             frmConsultarTarefasConcluidas frmConsultaTarefasConcluidas = new frmConsultarTarefasConcluidas();
             frmConsultaTarefasConcluidas.ShowDialog();
+        }
+
+        private void exportarParaCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var controller_tarefas = new ControllerTarefas();
+            List<Tarefa> tarefasFeitas = controller_tarefas.GetTarefasFeitas();
+
+            string nomeFicheiro = $"tarefas_concluidas.csv";
+
+            // Criar o ficheiro com FileStream + StreamWriter
+            FileStream fs = new FileStream(nomeFicheiro, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+
+            // Escreve o cabeçalho
+            sw.WriteLine("Programador,Descricao,DataPrevistaInicio,DataPrevistaFim,TipoTarefa,DataRealInicio,DataRealFim");
+
+            // Escreve os dados
+            foreach (var t in tarefasFeitas)
+            {
+                sw.WriteLine($"{t.IdProgramador},{t.descricao},{t.dataPrevistaInicio:yyyy-MM-dd},{t.dataPrevistaFim:yyyy-MM-dd},{t.IdTipoTarefa},{t.dataRealInicio:yyyy-MM-dd},{t.dataRealFim:yyyy-MM-dd}");
+            }
+
+            sw.Close();
+            fs.Close();
+
+            MessageBox.Show("Ficheiro CSV criado com sucesso!", "Exportação", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

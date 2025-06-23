@@ -1,6 +1,7 @@
 ﻿using iTasks.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,27 @@ namespace iTasks.Controllers
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao buscar tarefas: {ex.Message}");
+                return new List<Tarefa>();
+            }
+        }
+
+        // Retorna todas as tarefas que estejam feitas
+        public List<Tarefa> GetTarefasFeitas()
+        {
+            try
+            {
+                using (TarefaContext _dbContext = new TarefaContext())
+                {
+                    return _dbContext.Tarefas
+
+                        .Where(t => t.estadoAtual == EstadoAtual.Done)
+                        .OrderBy(t => t.ordemExecucao)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar tarefas feitas: {ex.Message}");
                 return new List<Tarefa>();
             }
         }
