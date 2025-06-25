@@ -1,24 +1,14 @@
-﻿using iTasks.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+Alexandre Almeida - 2211867
 
-namespace iTasks
-{
-    internal static class Program
-    {
-        /// <summary>
-        /// Ponto de entrada principal para o aplicativo.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        { 
+Miguel Silva - 2231683
+
+Dinis Ruivo - 2231436
 
 
-           /*
+1º Ir ao Ficheiro Program.cs, remover os comentários e correr o programa.(Depois de correr o programa voltar a meter os comentários para não duplicar os dados na base de dados)
+
+Descomentar o seguinte código:
+ /*
            
             using (var db = new TarefaContext())
             {
@@ -34,10 +24,6 @@ namespace iTasks
                 db.SaveChanges(); 
             }*/
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLogin());
-        }
 
-    }
-}
+2º Os dados de login do gestor são admin/admin e os dados do programador são programador1/programador1
+

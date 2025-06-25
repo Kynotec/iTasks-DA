@@ -29,7 +29,8 @@ namespace iTasks
             gvTarefasConcluidas.DataSource = allTasks.Where(t => t.estadoAtual == EstadoAtual.Done).ToList();
         }
 
-        private void btFechar_Click(object sender, EventArgs e)
+
+        private void btFechar_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }

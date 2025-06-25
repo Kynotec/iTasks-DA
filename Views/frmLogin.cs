@@ -20,23 +20,29 @@ namespace iTasks
 
         private void btLogin_Click(object sender, EventArgs e)
         {
-            //Criação de uma nova instancia da classe ControllerLogin para aceder ás funções da classe
-            var controller = new ControllerLogin(); 
-            bool sucesso = controller.Login(txtUsername.Text, txtPassword.Text);
-            
-            
-            if (sucesso)
+            try
             {
-                MessageBox.Show("Login bem-sucedido!");
-                this.Hide();
-                //mandar por parametro no formulário kanban o modelo do utilizador
-                frmKanban frmkanban = new frmKanban(controller.UtilizadorAutenticado);
-                frmkanban.ShowDialog();
-                this.Close();
+                // Criação de uma nova instância da classe ControllerLogin para aceder às funções da classe
+                var controller = new ControllerLogin();
+                bool sucesso = controller.Login(txtUsername.Text, txtPassword.Text);
+
+                if (sucesso)
+                {
+                    MessageBox.Show("Login bem-sucedido!");
+                    this.Hide();
+                    // Mandar por parâmetro no formulário kanban o modelo do utilizador
+                    frmKanban frmkanban = new frmKanban(controller.UtilizadorAutenticado);
+                    frmkanban.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Credenciais inválidas");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Credenciais inválidas");
+                MessageBox.Show("Ocorreu um erro durante o login: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

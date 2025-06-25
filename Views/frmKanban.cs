@@ -102,18 +102,25 @@ namespace iTasks
         // Altera o estado de uma tarefa selecionada em "ToDo" para "Doing"
         private void btSetDoing_Click(object sender, EventArgs e)
         {
-            if (lstTodo.SelectedItem is Tarefa tarefaSelecionada)
+            try
             {
-                var controller_tarefas = new ControllerTarefas();
+                if (lstTodo.SelectedItem is Tarefa tarefaSelecionada)
+                {
+                    var controller_tarefas = new ControllerTarefas();
 
-                // Atualiza o estado da tarefa e salva no sistema
-                tarefaSelecionada.estadoAtual = EstadoAtual.Doing;
-                controller_tarefas.AtualizarTarefa(tarefaSelecionada);
-                LoadTasks();
+                    // Atualiza o estado da tarefa e salva no sistema
+                    tarefaSelecionada.estadoAtual = EstadoAtual.Doing;
+                    controller_tarefas.AtualizarTarefa(tarefaSelecionada);
+                    LoadTasks();
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione uma tarefa para mudar o estado.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Por favor, selecione uma tarefa para mudar o estado.");
+                MessageBox.Show("Ocorreu um erro ao tentar atualizar a tarefa: " + ex.Message,"Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -128,18 +135,25 @@ namespace iTasks
         // Altera o estado de uma tarefa de "Doing" para "Done"
         private void btSetDone_Click(object sender, EventArgs e)
         {
-            if (lstDoing.SelectedItem is Tarefa tarefaSelecionada)
+            try
             {
-                var controller_tarefas = new ControllerTarefas();
+                if (lstDoing.SelectedItem is Tarefa tarefaSelecionada)
+                {
+                    var controller_tarefas = new ControllerTarefas();
 
-                // Atualiza o estado da tarefa para Done
-                tarefaSelecionada.estadoAtual = EstadoAtual.Done;
-                controller_tarefas.AtualizarTarefa(tarefaSelecionada);
-                LoadTasks();
+                    // Atualiza o estado da tarefa para Done
+                    tarefaSelecionada.estadoAtual = EstadoAtual.Done;
+                    controller_tarefas.AtualizarTarefa(tarefaSelecionada);
+                    LoadTasks();
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione uma tarefa para mudar o estado.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Por favor, selecione uma tarefa para mudar o estado.");
+                MessageBox.Show("Ocorreu um erro ao tentar atualizar a tarefa: " + ex.Message,"Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -147,19 +161,25 @@ namespace iTasks
         // (Nota: não reinicia o estado de "Done" conforme comentário)
         private void btSetTodo_Click(object sender, EventArgs e)
         {
-            // n sei se é para reiniciar o done tbm mas prontos vai ser só o doing
-            if (lstDoing.SelectedItem is Tarefa tarefaSelecionada)
+            try
             {
-                var controller_tarefas = new ControllerTarefas();
+                if (lstDoing.SelectedItem is Tarefa tarefaSelecionada)
+                {
+                    var controller_tarefas = new ControllerTarefas();
 
-                // Volta ao estado inicial
-                tarefaSelecionada.estadoAtual = EstadoAtual.ToDo;
-                controller_tarefas.AtualizarTarefa(tarefaSelecionada);
-                LoadTasks();
+                    // Volta ao estado inicial
+                    tarefaSelecionada.estadoAtual = EstadoAtual.ToDo;
+                    controller_tarefas.AtualizarTarefa(tarefaSelecionada);
+                    LoadTasks();
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione uma tarefa para mudar o estado.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Por favor, selecione uma tarefa para mudar o estado.");
+                MessageBox.Show("Ocorreu um erro ao tentar atualizar a tarefa: " + ex.Message,"Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -179,12 +199,13 @@ namespace iTasks
 
         private void exportarParaCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //buscar a lista das tarefas concluidas
             var controller_tarefas = new ControllerTarefas();
             List<Tarefa> tarefasFeitas = controller_tarefas.GetTarefasFeitas();
 
             string nomeFicheiro = $"tarefas_concluidas.csv";
 
-            // Criar o ficheiro com FileStream + StreamWriter
+            // Cria o ficheiro no mode create
             FileStream fs = new FileStream(nomeFicheiro, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs);
 
@@ -196,7 +217,7 @@ namespace iTasks
             {
                 sw.WriteLine($"{t.IdProgramador},{t.descricao},{t.dataPrevistaInicio:yyyy-MM-dd},{t.dataPrevistaFim:yyyy-MM-dd},{t.IdTipoTarefa},{t.dataRealInicio:yyyy-MM-dd},{t.dataRealFim:yyyy-MM-dd}");
             }
-
+            //fecha o ficheiro
             sw.Close();
             fs.Close();
 
